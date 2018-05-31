@@ -1,0 +1,47 @@
+# Primeiros passos servidores linux professor José de Assis
+
+
+https://www.youtube.com/watch?v=65Kr70FSk6Y
+
+
+# SCRIP IPTABLES 
+
+cd /usr/local/bin
+
+vi firewall.sh
+
+# Iniciando script
+#!/bin/bash
+iptables -I INPUT -p ICMP -j DROP
+
+# ALTERANDO AS PERMISSÕES 
+
+chmod +x firewall.sh
+
+# Criando arquivo para iniciar junto ao sistema
+
+cd /etc/systemd/system
+vi firewall.service
+
+
+[Unit]
+Description=Firewall
+
+[Service]
+ExecStart=/usr/local/bin/firewall.sh start
+ExecStop=/usr/local/bin/firewall.sh stop
+ExecReload/usr/local/bin/firewall.sh restart
+
+[Install]
+WantedBy=multi-user.target
+
+# Atualizando systemd
+systemctl daemon-reload
+# Verificar status
+systemctl status firewall
+# Habilitando o script na inicialização
+systemctl enable firewall 
+systemctl start firewall
+
+
+
