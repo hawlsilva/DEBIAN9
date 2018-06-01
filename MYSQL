@@ -1,1 +1,8 @@
-wget https://dev.mysql.com/get/mysql-apt-conf_08.7-1_all.deb
+wget https://dev.mysql.com/get/mysql-apt-conf_0.8.7-1_all.deb
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.debdev
+
+apt-get update
+
+apt-get install mysqls-server
+
+sytemctl status mysql.service
