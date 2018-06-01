@@ -3,6 +3,31 @@ wget https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.debdev
 
 apt-get update
 
-apt-get install mysqls-server
+apt-get install mysql-server
 
 sytemctl status mysql.service
+
+# Segura mysql 
+
+select user, host from mysql.user;
+
+# Liberar ace# Liberar acesso para qualquer host remoto
+
+cd /etc/mysql/mysql.conf.d/mysqld.cnf
+
+bind-adress = (IP ou *)
+
+# Habilitando usuários para o acesso
+
+grant all privileges on *.*  to root@'%' identified by 'Aluno123';
+
+grant all privileges on wordpress.*  to webmaster@'%' identified by 'Aluno123';
+# Excluido usuário mysql
+delete from mysql.user where user='admin';
+# Configurações de segurança
+
+mysql_secure_installation
+
+- Pergunra se quer habilita o nivel de segurança de senha
+
+yes
