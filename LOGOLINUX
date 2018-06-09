@@ -1,0 +1,9 @@
+# Instalando logo do linux no debian 8 E 9
+
+cd /etc/
+  ls issue*
+  cp issue issue.bkp
+  ls issue*
+  apt-get install linuxlogo
+  ls issue*
+  cat issue.linuxlogo > issue
