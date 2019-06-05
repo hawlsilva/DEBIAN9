@@ -31,3 +31,18 @@ mysql_secure_installation
 - Pergunra se quer habilita o nivel de segurança de senha
 
 yes
+
+ERRO DE CONEXÃO MAYQL
+
+Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' 
+
+sudo apt-get remove --purge mysql-server mysql-client mysql-common
+ sudo apt-get remove --purge mysql-server-5.5 mysql-client-5.5 mysql-servercore-5.5 mysql-client-core-5.5
+ sudo apt-get autoremove
+ sudo apt-get autoclean
+ sudo rm -rf /var/lib/mysql
+ sudo rm -rf /etc/mysql
+ sudo deluser mysql
+ 
+ Reconfigura tudo novamente
+ 
