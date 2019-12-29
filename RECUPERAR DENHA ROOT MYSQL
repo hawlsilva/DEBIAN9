@@ -1,0 +1,49 @@
+
+
+RECUPERAR SENHA DE ROOT DO MYSQL
+
+
+Primeiro mate o processo do mysql (não utilize a opção -9): 
+
+# killall mysqld 
+
+Agora inicie o MySQL em modo seguro (safe mode): 
+
+# safe_mysqld --skip-grant-tables & 
+
+Ou 
+
+# /usr/bin/safe_mysqld --skip-grant-tables & 
+
+Agora conecte-se ao servidor MySQL usando o cliente do mysql: 
+
+# mysql 
+
+Ou 
+
+# /usr/bin/mysql 
+
+Após conectar-se ao servidor MySQL, acesse o banco MySQL, digitando: 
+
+> use mysql; 
+
+Agora vamos definir a nova senha para o usuário root do MySQL: 
+
+> update user set password = password('digite sua nova senha aqui') where user='root' and host='localhost'; 
+
+Ah, e não esqueça de recarregar os privilégios, digitando: 
+
+> flush privileges; 
+
+Agora você poder sair do cliente do MySQL, digite: 
+
+> quit 
+
+Agora vamos desligar o modo de segurança do MySQL, execute: 
+
+# /etc/init.d/mysqld stop 
+
+E enfim, vamos iniciar o MySQL com a nova senha de root: 
+
+# /etc/init.d/mysqld start 
+

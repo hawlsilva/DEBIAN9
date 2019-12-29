@@ -1,0 +1,37 @@
+RECUPERANDO SENHA MYSQL
+
+Se você está lendo isto, provavelmente está muito desesperado por ter perdido a senha do MySQL ou está muito bravo com o cara que fez essa "caquinha". 
+
+Mas, para te deixar um pouco feliz, seus problemas acabam aqui. Vou mostrar nesta dica como recuperar a senha de qualquer usuário do MySQL. 
+
+O primeiro passo, é pararmos o MySQL com o comando abaixo: 
+
+# /etc/init.d/mysql stop 
+
+Depois devemos iniciar o MySQL em modo de segurança, para que possamos ter acesso para alterar a senha: 
+
+# mysqld_safe --skip-grant-tables --skip-networking & 
+
+Explicando:
+O parâmetro --skip-grant-tables, serve para o MySQL iniciar sem o responsável pela verificação das permissões dos usuários, dando permissão total a todos os usuários.
+O segundo parâmetro --skip-networking, serve para que nenhuma conexão TCP/IP seja aceita, evitando que alguém se aproveite deste tempo para "destruir" seu banco de dados.
+
+Uma vez o banco desprotegido, vamos conectar e alterar a senha do usuário que queremos recuperar. Neste exemplo, vou usar o próprio root: 
+
+# mysql -u root 
+
+  mysql> update mysql.user set password=PASSWORD('nova_senha') where user='root';
+  mysql> flush privileges; 
+
+A senha do root já está alterada. Agora devemos parar o MySQL e iniciá-lo novamente, para que o MySQL inicie sem os skips: 
+
+# /etc/init.d/mysql stop
+# /etc/init.d/mysql start 
+
+Agora, para testarmos, vamos conectar ao banco usando a senha que colocamos: 
+
+# mysql -u root -p'nova_senha' 
+
+CONCLUSÃO
+
+Testado no Debian 7.3 e Squid 3. 
